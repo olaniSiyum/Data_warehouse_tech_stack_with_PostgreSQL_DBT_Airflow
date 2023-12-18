@@ -3,3 +3,4 @@ the data warehouse techstack is built based on pNEUMA which is an open large-sca
 # objectives 
 To establish a scalable data infrastructure, leveraging AI-driven analysis of swarm UAV footage and static cameras, to collect and manage vehicle trajectory data. This infrastructure aims to support the city's traffic department in optimizing traffic flow and facilitating undisclosed projects by utilizing comprehensive, real-time data insights gathered from a city locations.
 
+# Data
