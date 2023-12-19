@@ -8,10 +8,12 @@ To establish a scalable data infrastructure, leveraging AI-driven analysis of sw
 # Data
 
 There are 6 types of vehicles. These are Car, Taxi, Bus, Medium Vehicle, Heavy Vehicle, Motorcycle.
+
 For each .csv file the following apply:
-– each row represents the data of a single vehicle
-– the first 10 columns in the 1st row include the columns’ names
-– the first 4 columns include information about the trajectory like the unique trackID, the type of vehicle, the distance traveled in meters and the average speed of the vehicle in km/h
-– the last 6 columns are then repeated every 6 columns based on the time frequency. For example, column_5 contains the latitude of the vehicle at time column_10, and column­­­_11 contains the latitude of the vehicle at time column_16.
-– Speed is in km/h, Longitudinal and Lateral Acceleration in m/sec2 and time in seconds.
+--> each row represents the data of a single vehicle 
+--> the first 10 columns in the 1st row include the columns’ names 
+--> the first 4 columns include information about the trajectory like the unique trackID, the type of vehicle, the distance traveled in meters and the average speed of the vehicle in km/h 
+--> the last 6 columns are then repeated every 6 columns based on the time frequency. For example, column_5 contains the latitude of the vehicle at time column_10, and column­­­_11 contains the latitude of the vehicle at time column_16. 
+--> Speed is in km/h, Longitudinal and Lateral Acceleration in m/sec2 and time in seconds.
+you can get the data here
 # Installation and Steps
