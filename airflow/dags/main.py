@@ -2,17 +2,19 @@ from datetime import datetime, timedelta
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 import psycopg2
-import sys
+import sys,os
 import pandas as pd 
 from sqlalchemy import create_engine
 import random
-sys.path.append('/home/olani/Documents/week2/Data_warehouse_tech_stack_with_PostgreSQL_DBT_Airflow/airflow/dags')
+dag_path = os.getcwd()
+sys.path.append('/arehouse_tech_stack_with_PostgreSQL_DBT_Airflow/airflow/dagshome/olani/Documents/week2/Data_w')
 from script.extract_data_source import get_data
 from script.transform_data import transform_data
 from script.load_data import load_data
+from script.extract_data_source import ELT
+from airflow.utils.dates import days_ago
 import requests
 import json
-import os
 
 # Function to simulate data loading into PostgreSQL
 def load_data_to_postgres():
@@ -25,33 +27,28 @@ def load_data_to_postgres():
         port='5432'
     )
 
-    # Create a cursor object using the connection
-    cursor = conn.cursor()
-
-    # Simulate data insertion
-    for i in range(10):  # Simulate loading 10 rows of data
-        data = (f"Data_{i}", random.randint(1, 100))  # Example data
-        cursor.execute("INSERT INTO your_table_name (column1, column2) VALUES (%s, %s)", data)
-
-    # Commit changes and close the connection
-    conn.commit()
-    conn.close()
+elt = ELT(read_dag_path=f"{dag_path }/home/olani/Downloads/20181024_d1_0830_0900.csv",
+         save_dag_path=f"{dag_path }/processed_data/")
 # Define the default dag arguments.
 default_args = {
-    'owner': 'admin',
-    'depends_on_past': False,
-    'email_on_failure': False,
-    'email_on_retry': False,
-    'retries': 5,
-    'retry_delay': timedelta(minutes=2)
+    'owner': 'airflow',
+    'start_date': days_ago(5)
 }
+ingestion_dag = DAG(
+    'traffic_data_ingestion',
+    default_args=default_args,
+    description='Aggregates booking records for data analysis',
+    schedule_interval=timedelta(hours=1),
+    catchup=False,
+    user_defined_macros={'date_to_millis': elt.execution_date_to_millis}
+)
 
 
 # Define the DAG
 dag = DAG(
     dag_id='new_dag',
     default_args=default_args,
-    start_date=datetime(2023, 12, 19),
+    start_date=datetime(2023, 12, 21),
     schedule_interval= "@daily" ) 
 
 task1 = PythonOperator(
