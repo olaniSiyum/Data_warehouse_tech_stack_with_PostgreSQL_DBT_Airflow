@@ -1,6 +1,7 @@
 {
     "python.analysis.extraPaths": [
         "./airflow/dags",
-        "./airflow/dags"
+        "./airflow/dags",
+        "./airflow/dags/script"
     ]
 }
